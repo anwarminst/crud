@@ -1,0 +1,37 @@
+<div class="movie-container">
+    <nz-table #basicTable [nzData]="listOfMovies" [nzFrontPagination]="false">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Actor</th>
+          <th>Actress</th>
+          <th>Realeas Year</th>
+          <th>Poster</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let data of listOfMovies; let i = index">
+            <td>{{ data.name }}</td>
+            <td>{{ data.actor }}</td>
+            <td>{{ data.actress }}</td>
+            <td>{{ data.release_year }}</td>
+            <td><img src="{{ data.poster_url }}" [alt]="data.poster_url" width="50" height="50"></td>
+            <td>
+              <button (click)="showModal(i)" nz-button nzType="primary"><span nz-icon nzType="edit" nzTheme="outline"></span></button>
+              <button (click)="delete(i)" nz-button nzType="primary" nzDanger><span nz-icon nzType="delete" nzTheme="outline"></span></button>
+            </td>
+          </tr>
+      </tbody>
+    </nz-table>
+  </div>
+
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="Movie Edit" (nzOnCancel)="Cancel()" (nzOnOk)="Ok()">
+    <ng-container *nzModalContent>
+        <input nz-input placeholder="Basic usage" [(ngModel)]="selectedMovie.name" type="text" />
+        <input nz-input placeholder="Basic usage" [(ngModel)]="selectedMovie.actor" type="text" />
+        <input nz-input placeholder="Basic usage" [(ngModel)]="selectedMovie.actress" type="text" />
+        <input nz-input placeholder="Basic usage" [(ngModel)]="selectedMovie.release_year" type="text" />
+        <!-- <input nz-input placeholder="Basic usage" [(ngModel)]="selectedMovie.name" type="text" /> -->
+    </ng-container>
+  </nz-modal>
