@@ -24,14 +24,26 @@
           </tr>
       </tbody>
     </nz-table>
+    <div class="add-movie-btn">
+    <button (click)="addMovie()"  nz-button nzType="primary" ><span nz-icon nzType="plus-square" nzTheme="outline"></span></button>
+    </div>
   </div>
 
   <nz-modal [(nzVisible)]="isVisible" nzTitle="Movie Edit" (nzOnCancel)="Cancel()" (nzOnOk)="Ok()">
     <ng-container *nzModalContent>
-        <input nz-input placeholder="Basic usage" [(ngModel)]="selectedMovie.name" type="text" />
-        <input nz-input placeholder="Basic usage" [(ngModel)]="selectedMovie.actor" type="text" />
-        <input nz-input placeholder="Basic usage" [(ngModel)]="selectedMovie.actress" type="text" />
-        <input nz-input placeholder="Basic usage" [(ngModel)]="selectedMovie.release_year" type="text" />
+        <input nz-input placeholder="Basic usage" (ngModelChange)="onValueCahnge($event, 'name')" [ngModel]="selectedMovie.name" type="text" />
+        <input nz-input placeholder="Basic usage" (ngModelChange)="onValueCahnge($event, 'actor')" [ngModel]="selectedMovie.actor" type="text" />
+        <input nz-input placeholder="Basic usage" (ngModelChange)="onValueCahnge($event, 'actress')" [ngModel]="selectedMovie.actress" type="text" />
+        <input nz-input placeholder="Basic usage" (ngModelChange)="onValueCahnge($event, 'release_year')" [ngModel]="selectedMovie.release_year" type="text" />
+        <!-- <input nz-input placeholder="Basic usage" [(ngModel)]="selectedMovie.name" type="text" /> -->
+    </ng-container>
+  </nz-modal>
+  <nz-modal [(nzVisible)]="isAddMovieVisible" nzTitle="Movie Edit" (nzOnCancel)="addMovieCancel()" (nzOnOk)="addMovieOk()">
+    <ng-container *nzModalContent>
+        <input nz-input placeholder="Basic usage" [(ngModel)]="name" type="text" />
+        <input nz-input placeholder="Basic usage"  [(ngModel)]="actor" type="text" />
+        <input nz-input placeholder="Basic usage"  [(ngModel)]="actress"  type="text" />
+        <input nz-input placeholder="Basic usage"  [(ngModel)]="release_year"  type="text" />
         <!-- <input nz-input placeholder="Basic usage" [(ngModel)]="selectedMovie.name" type="text" /> -->
     </ng-container>
   </nz-modal>

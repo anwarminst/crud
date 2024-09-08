@@ -11,8 +11,16 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './movies.component.less'
 })
 export class MoviesComponent {
-  isVisible = false;
+  public isVisible:boolean = false;
+  public isAddMovieVisible:boolean = false;
   selectedMovie: any;
+  newMovie: any;
+  currentMovie: any;
+  public name: string = '';
+  public actor: string = '';
+  public actress: string = '';
+  public release_year: number = 0;
+  // public poster_url: string = '';
 
   public listOfMovies = [
     {
@@ -61,7 +69,11 @@ export class MoviesComponent {
   Ok(): void {
     this.isVisible = false;
     let index = this.listOfMovies.findIndex((movie) => movie.name === this.selectedMovie.name);
-    this.listOfMovies[index] = this.selectedMovie;
+   
+    if (index === -1 && !this.currentMovie) {
+      this.listOfMovies[index] = this.currentMovie;
+    }
+    
   }
 
   Cancel(): void {
@@ -71,4 +83,49 @@ export class MoviesComponent {
     this.listOfMovies.splice(index, 1);
   }
 
+
+  onValueCahnge(value: any, key: string): void {
+    let index = this.listOfMovies.findIndex((movie) => movie.name === this.selectedMovie.name);
+    this.currentMovie = this.listOfMovies[index];
+    switch (key) {
+      case "name":
+        this.currentMovie.name = value;
+        break;
+      case "actor":
+        this.currentMovie.actor = value;
+        break;
+      case "actress":
+        this.currentMovie.actress = value;
+        break;
+      case "release_year":
+        this.currentMovie.release_year = value;
+        break;
+    }
+    console.log("selectedMovie changed : ", this.currentMovie);
+  }
+
+  addMovie(): void {  
+    this.isAddMovieVisible = true;
+
+  }
+
+  addMovieCancel(): void {
+    this.isAddMovieVisible = false;
+  }
+
+  addMovieOk(): void {
+    this.isAddMovieVisible = false;
+    let newMovie = {
+      "name": this.name,
+      "actor": this.actor,
+      "actress": this.actress,
+      "release_year": this.release_year,
+      "poster_url": "https://m.media-amazon.com/images/I/51vpnbwFHrL._AC_.jpg"
+    }
+    this.listOfMovies.push(newMovie)
+    this.name = '';
+    this.actor = '';
+    this.actress = '';
+    this.release_year = 0;
+  }
 }
