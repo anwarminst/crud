@@ -30,7 +30,19 @@
 <nz-modal [(nzVisible)]="isToDoAddVisible" nzTitle="Add Todo" (nzOnCancel)="toDoAddhandleCancel()"
     (nzOnOk)="toDoAddhandleOk()">
     <ng-container *nzModalContent>
-        <input nz-input placeholder="Please enter title" [(ngModel)]="title" type="text" />
-        <input nz-input placeholder="Please enter description" [(ngModel)]="description" type="text" />
+        <form nz-form [formGroup]="todoForm" (ngSubmit)="toDoAddhandleOk()">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzFor="title">E-mail</nz-form-label>
+                <nz-form-control [nzSpan]="14">
+                    <input nz-input type="text" formControlName="title" placeholder="Please enter title" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="6" nzFor="description">Description</nz-form-label>
+                <nz-form-control [nzSpan]="14">
+                    <input nz-input type="text" formControlName="description" placeholder="Please enter description" />
+                </nz-form-control>
+            </nz-form-item>
+        </form>
     </ng-container>
 </nz-modal>
