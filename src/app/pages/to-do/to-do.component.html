@@ -1,0 +1,36 @@
+<div class="to-do-container">
+    <nz-table #basicTable [nzData]="todos" [nzSize]="'small'" [nzShowPagination]="false">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of todos; track item) {
+            <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.description }}</td>
+                <td>
+                    <button nz-button nzType="primary" [nzSize]="'small'"><span nz-icon nzType="edit"></span></button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </nz-table>
+    <!-- add todo -->
+    <div class="btn-container">
+        <button nz-button (click)="addTodo()" nzType="primary" [nzSize]="'small'"><span nz-icon
+                nzType="plus"></span></button>
+    </div>
+</div>
+
+
+<nz-modal [(nzVisible)]="isToDoAddVisible" nzTitle="Add Todo" (nzOnCancel)="toDoAddhandleCancel()"
+    (nzOnOk)="toDoAddhandleOk()">
+    <ng-container *nzModalContent>
+        <input nz-input placeholder="Please enter title" [(ngModel)]="title" type="text" />
+        <input nz-input placeholder="Please enter description" [(ngModel)]="description" type="text" />
+    </ng-container>
+</nz-modal>

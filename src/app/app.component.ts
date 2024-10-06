@@ -1,19 +1,15 @@
 
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MoviesComponent } from './movies/movies.component';
+import { ToDoComponent } from './pages/to-do/to-do.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MoviesComponent],
+  imports: [RouterOutlet, ToDoComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.less'
 })
 export class AppComponent {
   title = 'Crud';
- 
-
-
-
 }
