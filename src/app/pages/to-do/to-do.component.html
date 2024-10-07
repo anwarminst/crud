@@ -8,15 +8,15 @@
             </tr>
         </thead>
         <tbody>
-            @for (item of todos; track item) {
-            <tr>
+
+            <tr *ngFor="let item of todos">
                 <td>{{ item.title }}</td>
                 <td>{{ item.description }}</td>
                 <td>
                     <button nz-button nzType="primary" [nzSize]="'small'"><span nz-icon nzType="edit"></span></button>
                 </td>
             </tr>
-            }
+
         </tbody>
     </nz-table>
     <!-- add todo -->
@@ -32,7 +32,7 @@
     <ng-container *nzModalContent>
         <form nz-form [formGroup]="todoForm" (ngSubmit)="toDoAddhandleOk()">
             <nz-form-item>
-                <nz-form-label [nzSpan]="6" nzFor="title">Title</nz-form-label>
+                <nz-form-label [nzSpan]="6" nzFor="title">Title </nz-form-label>
                 <nz-form-control [nzSpan]="14">
                     <input nz-input type="text" formControlName="title" placeholder="Please enter title" />
                 </nz-form-control>
